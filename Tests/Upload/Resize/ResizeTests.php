@@ -16,6 +16,8 @@ class ResizeTests extends WebTestCase
     
     private $file_test = 'img_test.jpg';
     
+    private $file_test_png = 'img_test.png';
+    
     public function setUp()
     {
         $this->dir_test = __DIR__ . '/../../pics/';
@@ -47,7 +49,7 @@ class ResizeTests extends WebTestCase
         $uploadedFile = new UploadedFile($this->dir_test . $this->file_test, $this->file_test);
         
         
-        $resize = new Resize($uploadedFile, 200, 150);
+        $resize = Resize::getFormatInstance($uploadedFile, 200, 150);
         
         $base_path = $this->dir_test . 'changesize/';
         
@@ -58,6 +60,31 @@ class ResizeTests extends WebTestCase
         list($largeur, $hauteur) = getimagesize($base_path.'autre.jpg');
         
         list($largeur_init, $hauteur_init) = getimagesize($base_path.'../'.$this->file_test);
+        
+        $this->assertNotEquals('200150', $largeur_init.$hauteur_init);
+        
+        $this->assertEquals('200150', $largeur.$hauteur);
+        
+    }
+    
+    
+    public function testResizePicsPng()
+    {
+        
+        $uploadedFile = new UploadedFile($this->dir_test . $this->file_test_png, $this->file_test_png);
+        
+        
+        $resize = Resize::getFormatInstance($uploadedFile, 200, 150);
+        
+        $base_path = $this->dir_test . 'changesize/';
+        
+        $resize->saveFile($base_path, 'autre.png');
+        
+        $this->assertTrue(file_exists($base_path.'autre.png'));
+        
+        list($largeur, $hauteur) = getimagesize($base_path.'autre.png');
+        
+        list($largeur_init, $hauteur_init) = getimagesize($base_path.'../'.$this->file_test_png);
         
         $this->assertNotEquals('200150', $largeur_init.$hauteur_init);
         

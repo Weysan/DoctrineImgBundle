@@ -118,7 +118,7 @@ class Upload
         }
         
         //resize and upload
-        $resize = new Resize($this->image, $this->width, $this->height);
+        $resize = Resize::getFormatInstance($this->image, $this->width, $this->height);
         $file = $resize->saveFile($this->getUploadDir(), $this->path);
         
         //$this->resizeFileUploaded($this->width, $this->height);

@@ -4,24 +4,24 @@ Create a thumbnail after uploading an image through a form in a Symfony2 project
 ## Install the bundle
 Using composer :
 
-`composer require weysan/doctrine-img-bundle`
+<pre>composer require weysan/doctrine-img-bundle</pre>
 
 Enable the bundle in the app\AppKernel.php :
 
-`$bundles = array(
+<pre>$bundles = array(
             ...,
             new Weysan\DoctrineImgBundle\WeysanDoctrineImgBundle(),
             ...,
-        );`
+        );</pre>
         
 Import the configuration file in your app\config\config.yml :
-`imports:
-    - { resource: "@WeysanDoctrineImgBundle/Resources/config/services.yml" }`
+<pre>imports:
+    - { resource: "@WeysanDoctrineImgBundle/Resources/config/services.yml" }</pre>
     
 ## How to use it ?
 Create your doctrine entity, and put the annotation :
 
-`@ImgResize("image", width="500", height="300", uploadDir="media/upload/article", saveField="path")`
+<pre>@ImgResize("image", width="500", height="300", uploadDir="media/upload/article", saveField="path")</pre>
 
 - image : the field where you put the annotation
 - width : the thumbnail's width

@@ -1,0 +1,30 @@
+{
+    "name": "weysan/doctrine-img-bundle",
+    "description": "Helper to create thumbnails thanks to doctrine annotation in a doctrine entity",
+    "type": "symfony-bundle",
+	"homepage": "http://www.raphael-goncalves.fr",
+    "authors": [
+        {
+            "name": "Raphael Goncalves",
+            "email": "contact@raphael-goncalves.fr"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "~2.3",
+        "symfony/twig-bundle": "~2.3",
+        "symfony/form": "~2.3",
+        "symfony/security-bundle": "~2.3"
+    },
+    "require-dev": {
+        "doctrine/doctrine-bundle": "~1.3",
+        "symfony/yaml": "~2.3",
+        "symfony/validator": "~2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Weysan\\DoctrineImgBundle": ""
+        }
+    }
+}

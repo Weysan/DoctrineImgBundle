@@ -3,6 +3,7 @@ namespace Weysan\DoctrineImgBundle\Tests\Upload;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Weysan\DoctrineImgBundle\Upload\Upload;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * Upload a file from annpotation informations
  *
@@ -54,6 +55,8 @@ class UploadTests extends WebTestCase
     
     public function testUploadFile()
     {
+        $base_path = $this->dir_test . 'changesize/';
+        
         $annotations = $this->getMockAnnotation(200, 150);
         
         //$imageToUpload = $this->dir_test . $this->file_test;

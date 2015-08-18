@@ -29,8 +29,10 @@ class Upload
     
     private $minHeight;
     
+    private $publicDir;
     
-    function __construct(ImgResize $annotations, UploadedFile $imageToUpload ){
+    
+    function __construct(ImgResize $annotations, UploadedFile $imageToUpload, $public_path = null ){
         
         $this->destinationDir = $annotations->uploadDir;
         
@@ -45,6 +47,12 @@ class Upload
         
         
         /* execution */
+        if($public_path === null){
+            $public_path = __DIR__ . '/../../../../web/';
+        }
+           
+        $this->setPublicDir($public_path);
+        
         $this->preUpload();
         $this->upload();
         
@@ -83,8 +91,21 @@ class Upload
      */
     protected function getUploadRootDir()
     {
+        $path = realpath($this->publicDir.'/'.$this->getUploadDir());
+        
+        if(!$path)
+            throw new \Exception('The upload directory doesn\'t exist: ' . $this->publicDir.'/'.$this->getUploadDir());
+        
         // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return $path;
+    }
+    
+    public function setPublicDir($public_dir)
+    {
+        if(!$public_dir)
+            throw new \Exception('The directory public doesn\'t exist');
+        
+        $this->publicDir = $public_dir;
     }
     
     /**

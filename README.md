@@ -16,6 +16,7 @@ Enable the bundle in the app\AppKernel.php :
         
 Import the configuration file in your app\config\config.yml :
 <pre>imports:
+	- { resource: "@WeysanDoctrineImgBundle/Resources/config/config.yml" }
     - { resource: "@WeysanDoctrineImgBundle/Resources/config/services.yml" }</pre>
     
 ## How to use it ?

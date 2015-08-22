@@ -3,7 +3,7 @@ namespace Weysan\DoctrineImgBundle\Upload;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Weysan\DoctrineImgBundle\Annotations\ImgResize;
-use Weysan\DoctrineImgBundle\Upload\Resize\Resize;
+use Weysan\DoctrineImgBundle\Upload\Transformation\Resize;
 /**
  * This class will upload and resize all files.
  *
@@ -19,32 +19,34 @@ class Upload
     
     private $width;
     
-    private $maxWidth;
-    
-    private $minWidth;
-    
     private $height;
     
-    private $maxHeight;
+    private $strict = true;
     
-    private $minHeight;
+    private $crop = false;
+    
+    private $publicDir;
     
     
-    function __construct(ImgResize $annotations, UploadedFile $imageToUpload ){
+    function __construct(ImgResize $annotations, UploadedFile $imageToUpload, $public_path = null ){
         
         $this->destinationDir = $annotations->uploadDir;
         
         $this->width = $annotations->width;
         $this->height = $annotations->height;
-        $this->minWidth = $annotations->minWidth;
-        $this->minHeight = $annotations->minHeight;
-        $this->maxWidth = $annotations->maxWidth;
-        $this->maxHeight = $annotations->maxHeight;
+        if(!is_null($annotations->strict)) $this->strict = $annotations->strict;
+        if(!is_null($annotations->crop)) $this->crop = $annotations->crop;
         
         $this->image = $imageToUpload;
         
         
         /* execution */
+        if($public_path === null){
+            $public_path = __DIR__ . '/../../../../web/';
+        }
+           
+        $this->setPublicDir($public_path);
+        
         $this->preUpload();
         $this->upload();
         
@@ -83,8 +85,21 @@ class Upload
      */
     protected function getUploadRootDir()
     {
+        $path = realpath($this->publicDir.'/'.$this->getUploadDir());
+        
+        if(!$path)
+            throw new \Exception('The upload directory doesn\'t exist: ' . $this->publicDir.'/'.$this->getUploadDir());
+        
         // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return $path;
+    }
+    
+    public function setPublicDir($public_dir)
+    {
+        if(!$public_dir)
+            throw new \Exception('The directory public doesn\'t exist');
+        
+        $this->publicDir = $public_dir;
     }
     
     /**
@@ -118,7 +133,7 @@ class Upload
         }
         
         //resize and upload
-        $resize = Resize::getFormatInstance($this->image, $this->width, $this->height);
+        $resize = Resize::getFormatInstance($this->image, $this->width, $this->height, $this->strict, $this->crop);
         $file = $resize->saveFile($this->getUploadDir(), $this->path);
         
         //$this->resizeFileUploaded($this->width, $this->height);

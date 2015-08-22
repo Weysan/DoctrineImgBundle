@@ -1,10 +1,7 @@
 services:
-#    weysan_doctrine_img.example:
-#        class: Weysan\DoctrineImgBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
-
     imgResize.post.persist:
        class: Weysan\DoctrineImgBundle\Listener\UploadDoctrineListener
+       arguments: [@service_container]
        tags:
            - { name: doctrine.event_listener, event: preUpdate, connection: default }
            - { name: doctrine.event_listener, event: prePersist, connection: default }

@@ -16,14 +16,10 @@ class ImgResize extends Annotation
     public $height;
 
     public $uploadDir;
-
-    public $maxHeight;
-
-    public $maxWidth;
-
-    public $minHeight;
-
-    public $minWidth;
+    
+    public $strict;
+    
+    public $crop;
 
     public $saveField;
 

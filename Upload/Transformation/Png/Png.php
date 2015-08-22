@@ -15,12 +15,16 @@ class Png implements FormatInterface
     
     protected $transformation;
     
-    public function __construct(UploadedFile $image, $width, $height)
+    protected $crop;
+    
+    public function __construct(UploadedFile $image, $width, $height, $strict = true, $crop = false)
     {
         $this->source = imagecreatefrompng($image); // La photo est la source
         
         $this->transformation = new Transformation($this->source);
-        $this->transformation->destinationSize($width, $height, true);
+        $this->transformation->destinationSize($width, $height, $strict);
+        
+        $this->crop = $crop;
     }
     
     /**
@@ -35,7 +39,7 @@ class Png implements FormatInterface
         /**
          * Save the JPG file
          */
-        $destination = $this->transformation->transform(true);
+        $destination = $this->transformation->transform($this->crop);
         
         imagesavealpha($destination, true);
         $color = imagecolorallocatealpha($destination, 0, 0, 0, 127);

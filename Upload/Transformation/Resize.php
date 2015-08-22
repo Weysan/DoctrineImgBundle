@@ -19,15 +19,15 @@ class Resize {
      * @return FormatInterface
      * @throws \Exception
      */
-    public static function getFormatInstance(UploadedFile $image, $width, $height)
+    public static function getFormatInstance(UploadedFile $image, $width, $height, $strict = true, $crop = false)
     {   
         switch($image->guessExtension()){
             case 'jpeg':
             case 'jpg':
-                return new Jpg($image, $width, $height);
+                return new Jpg($image, $width, $height, $strict, $crop);
                 break;
             case 'png':
-                return new Png($image, $width, $height);
+                return new Png($image, $width, $height, $strict, $crop);
                 break;
             default:
                 throw new \Exception('Image extension not supported.');

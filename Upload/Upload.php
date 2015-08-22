@@ -19,15 +19,11 @@ class Upload
     
     private $width;
     
-    private $maxWidth;
-    
-    private $minWidth;
-    
     private $height;
     
-    private $maxHeight;
+    private $strict = true;
     
-    private $minHeight;
+    private $crop = false;
     
     private $publicDir;
     
@@ -38,10 +34,8 @@ class Upload
         
         $this->width = $annotations->width;
         $this->height = $annotations->height;
-        $this->minWidth = $annotations->minWidth;
-        $this->minHeight = $annotations->minHeight;
-        $this->maxWidth = $annotations->maxWidth;
-        $this->maxHeight = $annotations->maxHeight;
+        if(!is_null($annotations->strict)) $this->strict = $annotations->strict;
+        if(!is_null($annotations->crop)) $this->crop = $annotations->crop;
         
         $this->image = $imageToUpload;
         
@@ -139,7 +133,7 @@ class Upload
         }
         
         //resize and upload
-        $resize = Resize::getFormatInstance($this->image, $this->width, $this->height);
+        $resize = Resize::getFormatInstance($this->image, $this->width, $this->height, $this->strict, $this->crop);
         $file = $resize->saveFile($this->getUploadDir(), $this->path);
         
         //$this->resizeFileUploaded($this->width, $this->height);

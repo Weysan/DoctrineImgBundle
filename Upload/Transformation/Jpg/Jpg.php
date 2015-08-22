@@ -16,12 +16,17 @@ class Jpg implements FormatInterface
     
     protected $transformation;
     
-    public function __construct(UploadedFile $image, $width, $height)
+    protected $crop;
+    
+    public function __construct(UploadedFile $image, $width, $height, $strict = true, $crop = false)
     {
+        
         $this->source = imagecreatefromjpeg($image); // La photo est la source
         
         $this->transformation = new Transformation($this->source);
-        $this->transformation->destinationSize($width, $height, true);
+        $this->transformation->destinationSize($width, $height, $strict);
+        
+        $this->crop = $crop;
     }
     
     /**
@@ -37,7 +42,7 @@ class Jpg implements FormatInterface
          * Save the JPG file
          */
         $img_saved = imagejpeg(
-                $this->transformation->transform(true), 
+                $this->transformation->transform($this->crop), 
                 $uploadDir . '/' . $filename
                 );
         

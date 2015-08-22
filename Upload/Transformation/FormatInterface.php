@@ -1,5 +1,5 @@
 <?php
-namespace Weysan\DoctrineImgBundle\Upload\Resize;
+namespace Weysan\DoctrineImgBundle\Upload\Transformation;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**

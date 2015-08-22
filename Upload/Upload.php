@@ -3,7 +3,7 @@ namespace Weysan\DoctrineImgBundle\Upload;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Weysan\DoctrineImgBundle\Annotations\ImgResize;
-use Weysan\DoctrineImgBundle\Upload\Resize\Resize;
+use Weysan\DoctrineImgBundle\Upload\Transformation\Resize;
 /**
  * This class will upload and resize all files.
  *

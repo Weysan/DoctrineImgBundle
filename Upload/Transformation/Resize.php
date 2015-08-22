@@ -1,9 +1,9 @@
 <?php
-namespace Weysan\DoctrineImgBundle\Upload\Resize;
+namespace Weysan\DoctrineImgBundle\Upload\Transformation;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Weysan\DoctrineImgBundle\Upload\Resize\Jpg\ResizeJpg;
-use Weysan\DoctrineImgBundle\Upload\Resize\Png\ResizePng;
+use Weysan\DoctrineImgBundle\Upload\Transformation\Jpg\Jpg;
+use Weysan\DoctrineImgBundle\Upload\Transformation\Png\Png;
 /**
  * This class will resize an image
  *
@@ -24,10 +24,10 @@ class Resize {
         switch($image->guessExtension()){
             case 'jpeg':
             case 'jpg':
-                return new ResizeJpg($image, $width, $height);
+                return new Jpg($image, $width, $height);
                 break;
             case 'png':
-                return new ResizePng($image, $width, $height);
+                return new Png($image, $width, $height);
                 break;
             default:
                 throw new \Exception('Image extension not supported.');

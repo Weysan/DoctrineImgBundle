@@ -28,7 +28,7 @@ class Upload
     private $publicDir;
     
     
-    function __construct(ImgResize $annotations, UploadedFile $imageToUpload, $public_path = null ){
+    function __construct(ImgResize $annotations, UploadedFile $imageToUpload = null, $public_path = null ){
         
         $this->destinationDir = $annotations->uploadDir;
         
@@ -44,12 +44,13 @@ class Upload
         if($public_path === null){
             $public_path = __DIR__ . '/../../../../web/';
         }
-           
-        $this->setPublicDir($public_path);
         
-        $this->preUpload();
-        $this->upload();
+        if(null !== $this->image){
+            $this->setPublicDir($public_path);
         
+            $this->preUpload();
+            $this->upload();
+        }
     }
     
     /**

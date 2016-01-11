@@ -39,11 +39,11 @@ class Png implements FormatInterface
         /**
          * Save the JPG file
          */
-        $destination = $this->transformation->transform($this->crop);
-        
-        imagesavealpha($destination, true);
-        $color = imagecolorallocatealpha($destination, 0, 0, 0, 127);
-        imagefill($destination, 0, 0, $color);
+        $destination = $this->transformation->transform($this->crop);        
+        $black = imagecolorallocate($destination, 0, 0, 0);
+
+        // Make the background transparent
+        imagecolortransparent($destination, $black);
         
         /**
          * Save the PNG file
@@ -55,6 +55,8 @@ class Png implements FormatInterface
         
         if(!$img_saved)
             throw new \Exception('The image can\'t be saved.');
+        
+        imagedestroy($destination);
         
         return $filename;
     }

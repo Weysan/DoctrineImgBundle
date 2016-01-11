@@ -16,7 +16,7 @@ class ResizeTests extends WebTestCase
     
     private $file_test = 'img_test.jpg';
     
-    private $file_test_png = 'img_test.png';
+    private $file_test_png = 'logo-test.png';
     
     public function setUp()
     {

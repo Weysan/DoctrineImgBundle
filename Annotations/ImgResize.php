@@ -16,6 +16,8 @@ class ImgResize extends Annotation
     public $height;
 
     public $uploadDir;
+
+    public $uploadDirDate;
     
     public $strict;
     

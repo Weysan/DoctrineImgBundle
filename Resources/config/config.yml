@@ -1,5 +1,2 @@
 weysan_doctrine_img:
     public_root: %kernel.root_dir%/../web/
-rules:
-  symfony.dependency_injection.no_container_as_parameter:
-    enabled: false

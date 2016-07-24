@@ -122,7 +122,6 @@ class Upload
     public function preUpload()
     {
         if (null !== $this->image && $this->image != '' ) {
-            //var_dump($this->image); die();
             $this->path = sha1(uniqid(mt_rand(), true)).'.'.$this->image->guessExtension();
         }
     }

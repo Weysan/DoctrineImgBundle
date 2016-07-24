@@ -31,9 +31,6 @@ class UploadDoctrineListener
      */
     private function uploadProcess( LifecycleEventArgs $args ){
         $entity = $args->getEntity();
-        $entityManager = $args->getEntityManager();
-        
-        //var_dump($entityManager);
         
         /* get Entities annotation's data */
         $aAnnotations = ImgResizeReader::hydrateObject(get_class( $entity ), $entity);
@@ -43,7 +40,6 @@ class UploadDoctrineListener
                 $oResize = new Upload( $annotation[0], $entity->$sGetterImg() );
                 $newImgName = $oResize->getImgNewName();
                 $setterProperty = 'set' . ucfirst( $annotation[0]->saveField );
-                //die($setterProperty);
                 if( $newImgName!= '' && !is_null( $newImgName ) ) $entity->$setterProperty( $newImgName );
             }
         }

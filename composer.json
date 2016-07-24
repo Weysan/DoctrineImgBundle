@@ -20,5 +20,6 @@
         "psr-4": {
             "Weysan\\DoctrineImgBundle\\": ""
         }
-    }
+    },
+    "license": "MIT"
 }

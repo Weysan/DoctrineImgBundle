@@ -30,4 +30,5 @@ Create your doctrine entity, and put the annotation :
 - strict : (true or false, default is true) if strict is true, the thumbnail will have the strict height and width. If strict is false, then the height and width will be the maximum size of the saved thumbnail.
 - crop : (true or false, default is false) Would you like that the thumbnail could be cropped (interesting if strict is set to true)
 - uploadDir : the directory where to put the thumbnail (in the public directory)
+- uploadDirDate : (true or false, default is false) if the directory manages folders by date (uploadDir/YYYY/MM/). The folder must be existing.
 - saveField : the entity's field where to save the thumbnail's name

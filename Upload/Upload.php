@@ -31,6 +31,9 @@ class Upload
     function __construct(ImgResize $annotations, UploadedFile $imageToUpload = null, $public_path = null ){
         
         $this->destinationDir = $annotations->uploadDir;
+		if($annotations->uploadDirDate) {
+            $this->destinationDir = $annotations->uploadDir . date('Y') . DIRECTORY_SEPARATOR . date('m') . DIRECTORY_SEPARATOR;
+        }
         
         $this->width = $annotations->width;
         $this->height = $annotations->height;

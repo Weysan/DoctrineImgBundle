@@ -27,8 +27,7 @@ class ImgResizeReader
                             }
                     }
             }
-            //var_dump( $data );
+
             return $aAnnotations;
-            return false;
     }
 }

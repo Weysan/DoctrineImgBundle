@@ -33,7 +33,7 @@ class Transformation
         if($strict){
             $this->destination = imagecreatetruecolor((int)$width, (int)$height);
         } else {
-            $proportions = $this->getDestinationSizeProportionized($width, $height);
+            $this->getDestinationSizeProportionized($width, $height);
         }
     }
     

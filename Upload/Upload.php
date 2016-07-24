@@ -42,12 +42,6 @@ class Upload
         
         $this->image = $imageToUpload;
         
-        
-        /* execution */
-        if($public_path === null){
-            $public_path = __DIR__ . '/../../../../web/';
-        }
-        
         if(null !== $this->image){
             $this->setPublicDir($public_path);
         

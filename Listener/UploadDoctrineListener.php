@@ -4,6 +4,8 @@ namespace Weysan\DoctrineImgBundle\Listener;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Weysan\DoctrineImgBundle\Annotations\ImgResizeReader;
 use Weysan\DoctrineImgBundle\Upload\Upload;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 /**
  * This file will listen doctrine events and resize pictures data.
  *
@@ -11,8 +13,10 @@ use Weysan\DoctrineImgBundle\Upload\Upload;
  */
 class UploadDoctrineListener 
 {
-    function __construct() {
-        
+    protected $public_path;
+
+    function __construct(ContainerInterface $container) {
+        $this->public_path = $container->getParameter( 'weysan_doctrine_img.public_root' );
     }
     
     public function prePersist( LifecycleEventArgs $args ){
@@ -31,13 +35,13 @@ class UploadDoctrineListener
      */
     private function uploadProcess( LifecycleEventArgs $args ){
         $entity = $args->getEntity();
-        
+
         /* get Entities annotation's data */
         $aAnnotations = ImgResizeReader::hydrateObject(get_class( $entity ), $entity);
         foreach( $aAnnotations as $annotation ){
             if( !empty($annotation[0]) ){
                 $sGetterImg = "get" .  ucfirst( $annotation[1] ) ;
-                $oResize = new Upload( $annotation[0], $entity->$sGetterImg() );
+                $oResize = new Upload( $annotation[0], $entity->$sGetterImg(), $this->public_path );
                 $newImgName = $oResize->getImgNewName();
                 $setterProperty = 'set' . ucfirst( $annotation[0]->saveField );
                 if( $newImgName!= '' && !is_null( $newImgName ) ) $entity->$setterProperty( $newImgName );

@@ -133,8 +133,6 @@ class Upload
         $resize = Resize::getFormatInstance($this->image, $this->width, $this->height, $this->strict, $this->crop);
         $file = $resize->saveFile($this->getUploadDir(), $this->path);
         
-        //$this->resizeFileUploaded($this->width, $this->height);
-        
         unset($this->image);
         
         return $file;

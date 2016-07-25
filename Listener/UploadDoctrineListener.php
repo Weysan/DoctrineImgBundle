@@ -16,7 +16,8 @@ class UploadDoctrineListener
     protected $public_path;
 
     function __construct(ContainerInterface $container) {
-        $this->public_path = $container->getParameter( 'weysan_doctrine_img.public_root' );
+        $config = $container->getParameter( 'weysan_doctrine_img.config' );
+        $this->public_path = $config['public_root'];
     }
     
     public function prePersist( LifecycleEventArgs $args ){

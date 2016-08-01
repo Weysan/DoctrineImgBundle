@@ -19,6 +19,10 @@ Import the configuration file in your app\config\config.yml :
 	- { resource: "@WeysanDoctrineImgBundle/Resources/config/config.yml" }
     - { resource: "@WeysanDoctrineImgBundle/Resources/config/services.yml" }</pre>
     
+You can specify where the public directory is in your config.yml file :
+<pre>weysan_doctrine_img:
+    public_root: %kernel.root_dir%/../web/</pre>
+
 ## How to use it ?
 Create your doctrine entity, and put the annotation :
 

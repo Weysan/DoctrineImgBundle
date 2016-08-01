@@ -28,7 +28,7 @@ class Upload
     private $publicDir;
     
     
-    function __construct(ImgResize $annotations, UploadedFile $imageToUpload = null, $public_path = null ){
+    public function __construct(ImgResize $annotations, UploadedFile $imageToUpload = null, $public_path = null ){
         
         $this->destinationDir = $annotations->uploadDir;
 		if($annotations->uploadDirDate) {

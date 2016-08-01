@@ -1,5 +1,5 @@
 # DoctrineImgBundle
-Create a thumbnail after uploading an image through a form in a Symfony2 project
+Create a thumbnail after uploading an image through a form in a Symfony3 project
 
 ## Install the bundle
 Using composer :
@@ -22,7 +22,7 @@ Import the configuration file in your app\config\config.yml :
 ## How to use it ?
 Create your doctrine entity, and put the annotation :
 
-<pre>@ImgResize("image", width="500", height="300", uploadDir="media/upload/article", saveField="path", strict=true, crop=false)</pre>
+<pre>@ImgResize("image", width="500", height="300", uploadDir="media/upload/article", uploadDirDate=true, saveField="path", strict=true, crop=false)</pre>
 
 - image : the field where you put the annotation
 - width : the thumbnail's width

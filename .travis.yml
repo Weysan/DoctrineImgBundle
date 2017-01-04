@@ -8,7 +8,9 @@ env:
   - SYMFONY_VERSION=3.0.*
   - SYMFONY_VERSION=dev-master
   
-before_script:
+before_install:
   - composer require symfony/symfony:${SYMFONY_VERSION}
+
+install: composer update --prefer-source
 
 script: phpunit --coverage-text

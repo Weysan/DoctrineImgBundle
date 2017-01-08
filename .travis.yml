@@ -8,8 +8,11 @@ env:
   
 before_install:
   - composer require symfony/symfony:${SYMFONY_VERSION}
-  - ls -al ./vendor/symfony
+  - composer require symfony/validator
+  - composer require symfony/symfony:${SYMFONY_VERSION}
+  - cp ./phpunit.xml.dist ./phpunit.xml
+  - ls -al ./vendor/symfony/symfony/
 
-install: composer install --prefer-source
+install: composer update --prefer-source
 
 script: phpunit --bootstrap=Tests/bootstrap.php --coverage-text

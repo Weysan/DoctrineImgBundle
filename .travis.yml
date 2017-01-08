@@ -9,7 +9,7 @@ env:
 before_install:
   - composer require symfony/symfony:${SYMFONY_VERSION}
   - composer require symfony/validator
-  - ls -al
+  - ls -al ./vendor
 
 install: composer update --prefer-source
 
